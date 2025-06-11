@@ -1,0 +1,25 @@
+<header class="header">
+  <div class="brand">OPAAA</div>
+
+  <div class="user-area">
+    <span class="username">Olá, {{ userName }}</span>
+    <button class="logout-btn" (click)="logout()">Sair</button>
+  </div>
+</header>
+
+<main class="menu-container">
+  <a routerLink="/dados-saude" class="card">
+    <i class="fas fa-heartbeat icon"></i>
+    <h3>Inserir Dados de Saúde</h3>
+  </a>
+
+  <a routerLink="/historico" class="card">
+    <i class="fas fa-chart-line icon"></i>
+    <h3>Histórico de Dados</h3>
+  </a>
+
+  <a routerLink="/consultas" class="card">
+    <i class="fas fa-file-medical icon"></i>
+    <h3>Consultas e Receitas</h3>
+  </a>
+</main>

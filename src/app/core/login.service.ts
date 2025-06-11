@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { UsuarioDTO } from "./interfaces/usuario.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class LoginService {
 
     constructor(private http: HttpClient) { }
 
-    validaLogin() {
-        return this.http.post(this.apiURL + 'login', '')
+    validaLogin(usuario: UsuarioDTO) {
+      console.log('Validando login:', usuario);
+        return this.http.post(this.apiURL + 'login', usuario);
     }
 }

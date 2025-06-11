@@ -1,2 +1,17 @@
-<h1>Tela de Login</h1>
-<button (click)="login()">Logar botão</button>
+<div class="login-container">
+  <div class="login-card">
+    <h2>Entrar no Sistema</h2>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+      <label for="email">Email ou CPF</label>
+      <input id="email" type="text" formControlName="email" placeholder="Digite seu email ou CPF" />
+
+      <label for="senha">Senha</label>
+      <input id="senha" type="password" formControlName="senha" placeholder="Digite sua senha" />
+
+      <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
+
+      <p class="link">Esqueceu a senha?</p>
+    </form>
+  </div>
+</div>
