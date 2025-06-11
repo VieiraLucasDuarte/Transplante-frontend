@@ -19,4 +19,8 @@ export class DashboardComponent {
   logout(): void {
     this.router.navigate(['']);
   }
+
+  onSubmit(): void {
+    this.router.navigate(['saude']);
+  }
 }
