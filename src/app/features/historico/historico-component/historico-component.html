@@ -1,1 +1,32 @@
-<p>historico-component works!</p>
+<div class="filtros">
+  <button [class.ativo]="filtroSelecionado === 'hoje'" (click)="filtroSelecionado = 'hoje'">Hoje</button>
+  <button [class.ativo]="filtroSelecionado === 'semana'" (click)="filtroSelecionado = 'semana'">Semana</button>
+  <button [class.ativo]="filtroSelecionado === 'mes'" (click)="filtroSelecionado = 'mes'">Mês</button>
+</div>
+
+<table class="tabela" *ngIf="historico != null && historico.length > 0">
+  <thead>
+    <tr>
+      <th>Data</th>
+      <th>Pressão</th>
+      <th>Frequência</th>
+      <th>Temperatura</th>
+      <th>Saturação</th>
+      <th>Peso</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of historico">
+      <td>{{ item.DataHora }}</td>
+      <td>{{ item.PressaoArterial }}</td>
+      <td>{{ item.FrequenciaCardiaca }}</td>
+      <td>{{ item.TemperaturaCorporal }}</td>
+      <td>{{ item.SaturacaoOxigenio }}</td>
+      <td>{{ item.Peso }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="acoes">
+  <button (click)="exportarCSV()">Exportar CSV</button>
+</div>

@@ -4,27 +4,27 @@
   <form #form="ngForm" (ngSubmit)="onSubmit(form)">
     
     <div class="form-group">
-      <label for="pressao">Pressão Arterial</label>
-      <input type="text" id="pressao" name="pressao" placeholder="Ex: 120/80" required ngModel />
-      <small *ngIf="form.submitted && !form.controls['pressao']?.valid">Informe a pressão arterial.</small>
+      <label for="pressaoArterial">Pressão Arterial</label>
+      <input type="text" id="pressaoArterial" name="pressaoArterial" placeholder="Ex: 120/80" required ngModel />
+      <small *ngIf="form.submitted && !form.controls['pressaoArterial']?.valid">Informe a pressão arterial.</small>
     </div>
 
     <div class="form-group">
-      <label for="fc">Frequência Cardíaca (bpm)</label>
-      <input type="number" id="fc" name="fc" placeholder="Ex: 72" required ngModel />
-      <small *ngIf="form.submitted && !form.controls['fc']?.valid">Informe a frequência cardíaca.</small>
+      <label for="frequenciaCardicacao">Frequência Cardíaca (bpm)</label>
+      <input type="number" id="frequenciaCardicacao" name="frequenciaCardicacao" placeholder="Ex: 72" required ngModel />
+      <small *ngIf="form.submitted && !form.controls['frequenciaCardicacao']?.valid">Informe a frequência cardíaca.</small>
     </div>
 
     <div class="form-group">
-      <label for="temp">Temperatura (°C)</label>
-      <input type="number" step="0.1" id="temp" name="temp" required ngModel />
-      <small *ngIf="form.submitted && !form.controls['temp']?.valid">Informe a temperatura corporal.</small>
+      <label for="temperaturaCorporal">Temperatura (°C)</label>
+      <input type="number" step="0.1" id="temperaturaCorporal" name="temperaturaCorporal" required ngModel />
+      <small *ngIf="form.submitted && !form.controls['temperaturaCorporal']?.valid">Informe a temperatura corporal.</small>
     </div>
 
     <div class="form-group">
-      <label for="spo2">Saturação de Oxigênio (SpO₂)</label>
-      <input type="number" id="spo2" name="spo2" placeholder="Ex: 98" required ngModel />
-      <small *ngIf="form.submitted && !form.controls['spo2']?.valid">Informe a saturação.</small>
+      <label for="saturacaoOxigenio">Saturação de Oxigênio (SpO₂)</label>
+      <input type="number" id="saturacaoOxigenio" name="saturacaoOxigenio" placeholder="Ex: 98" required ngModel />
+      <small *ngIf="form.submitted && !form.controls['saturacaoOxigenio']?.valid">Informe a saturação.</small>
     </div>
 
     <div class="form-group">
@@ -34,11 +34,11 @@
     </div>
 
     <div class="form-group checkbox-group">
-      <input type="checkbox" id="medicamentos" name="medicamentos" ngModel />
-      <label for="medicamentos">Tomei todos os medicamentos hoje</label>
+      <input type="checkbox" id="tomouRemedios" name="tomouRemedios" ngModel />
+      <label for="tomouRemedios">Tomei todos os medicamentos hoje</label>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label>Como você está se sentindo hoje?</label>
       <div class="emoji-selector">
         <label>
@@ -55,7 +55,7 @@
         </label>
       </div>
       <small *ngIf="form.submitted && !humorSelecionado">Escolha como está se sentindo.</small>
-    </div>
+    </div> -->
 
     <button type="submit" class="submit-btn">Salvar</button>
 

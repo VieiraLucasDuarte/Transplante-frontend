@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
+import { DadosSaudeService } from '../../core/dadosSaude.service';
+// import { DadosSaudeService } from '../../core/DadosSaude.service';
 
 @Component({
   selector: 'app-dados-saude-component',
@@ -9,15 +11,19 @@ import { FormsModule, NgForm } from '@angular/forms';
   styleUrl: './dados-saude-component.scss'
 })
 export class DadosSaudeComponent {
-humorSelecionado: string = '';
+
+  humorSelecionado: string = '';
   mensagemSucesso = '';
-  
+
+  constructor(
+    private serviceDadosVitias: DadosSaudeService
+  ) { }
+
   onSubmit(form: NgForm) {
     if (form.valid) {
-      console.log(form.value);
-      this.mensagemSucesso = 'Dados salvos com sucesso!';
-      form.resetForm();
-      this.humorSelecionado = '';
+      this.serviceDadosVitias.saveDadosSaude(form.value).subscribe(x => {
+        console.log(x);
+      })
     }
   }
 }
