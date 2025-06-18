@@ -12,28 +12,31 @@ import { DadosVitais } from '../../../core/interfaces/dadosSaude.interface';
 })
 
 export class HistoricoComponent implements OnInit {
-historico: DadosVitais[] = [];
+  // historico: DadosVitais[] = [];
+  historico: any[] = [];
   constructor(
     private serviceDadosVitias: DadosSaudeService
   ) { }
 
   ngOnInit(): void {
-    this.findDadosSaude();
+    this.preenche();
   }
 
-  private findDadosSaude() {
-    this.serviceDadosVitias.getDadosSaude().subscribe(x => {
-      this.historico = x;
-      console.log(this.historico);
-    })
+  findDadosSaude() {
+    // this.serviceDadosVitias.getDadosSaude().subscribe(x => {
+    //   this.historico = x;
+    //   console.log(this.historico, 'hist');
+    // })
   }
   filtroSelecionado: 'hoje' | 'semana' | 'mes' = 'hoje';
+  preenche() {
+    this.historico = [
+      { DataHora: '12/06/2025', PressaoArterial: '120/80', FrequenciaCardiaca: '72 bpm', TemperaturaCorporal: '36.5°C', SaturacaoOxigenio: '98%', Peso: '70kg' },
+      { DataHora: '11/06/2025', PressaoArterial: '118/78', FrequenciaCardiaca: '70 bpm', TemperaturaCorporal: '36.6°C', SaturacaoOxigenio: '97%', Peso: '70.2kg' },
+      // Adicione mais dados aqui
+    ];
+  }
 
-  // historico = [
-  //   { data: '12/06/2025', pressao: '120/80', frequencia: '72 bpm', temperatura: '36.5°C', saturacao: '98%', peso: '70kg' },
-  //   { data: '11/06/2025', pressao: '118/78', frequencia: '70 bpm', temperatura: '36.6°C', saturacao: '97%', peso: '70.2kg' },
-  //   // Adicione mais dados aqui
-  // ];
 
   exportarCSV() {
     const header = 'Data,Pressão,Frequência,Temperatura,Saturação,Peso';

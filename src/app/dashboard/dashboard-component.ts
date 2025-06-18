@@ -15,11 +15,6 @@ export class DashboardComponent {
     private router: Router
   ) {
 }
-  userName = 'Lucas';
-  logout(): void {
-    this.router.navigate(['']);
-  }
-
   onSubmit(): void {
     this.router.navigate(['saude']);
   }

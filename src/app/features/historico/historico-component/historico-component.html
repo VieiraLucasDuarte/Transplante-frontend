@@ -4,7 +4,7 @@
   <button [class.ativo]="filtroSelecionado === 'mes'" (click)="filtroSelecionado = 'mes'">Mês</button>
 </div>
 
-<table class="tabela" *ngIf="historico != null && historico.length > 0">
+<table class="tabela" *ngIf="historico != null">
   <thead>
     <tr>
       <th>Data</th>
