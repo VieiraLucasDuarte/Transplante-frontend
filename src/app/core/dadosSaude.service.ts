@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { DadosSaudeDTO, DadosVitais } from "./interfaces/dadosSaude.interface";
+import { DadoSaude, DadosVitais } from "./interfaces/dadosSaude.interface";
 import { Observable } from "rxjs";
 
 @Injectable({
@@ -16,9 +16,5 @@ export class DadosSaudeService {
     return this.http.get<Array<DadosVitais>>(this.apiURL);
   }
 
-  saveDadosSaude(dadosSaude: DadosSaudeDTO) {
-    dadosSaude.IdPessoa = 1;
-    return this.http.post(this.apiURL + 'saveDadosVitais', dadosSaude);
-  }
   
 }

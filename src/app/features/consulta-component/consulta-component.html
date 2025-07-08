@@ -1,35 +1,38 @@
-<div class="consultas">
-  <div *ngFor="let consulta of consultas" class="card-consulta">
-    <h3>{{ consulta.data }}</h3>
-    <p><strong>Médico:</strong> {{ consulta.medico }}</p>
-    <p><strong>Diagnóstico:</strong> {{ consulta.diagnostico }}</p>
+<main class="form-container">
+  <h2 style="text-align: center;">Consultas</h2>
+  <div class="consultas">
+    <div *ngFor="let consulta of consultas" class="card-consulta">
+      <h3>{{ consulta.data }}</h3>
+      <p><strong>Médico:</strong> {{ consulta.medico }}</p>
+      <p><strong>Diagnóstico:</strong> {{ consulta.diagnostico }}</p>
 
-    <div *ngIf="consulta.receitas.length">
-      <strong>Receitas:</strong>
-      <ul>
-        <li *ngFor="let receita of consulta.receitas">
-          <button (click)="visualizar(receita)">Visualizar</button>
-          <button (click)="baixar(receita)">Baixar</button>
-          {{ receita }}
-        </li>
-      </ul>
+      <div *ngIf="consulta?.receitas?.length > 0">
+        <strong>Receitas:</strong>
+        <ul>
+          <li *ngFor="let receita of consulta.receitas">
+            <button (click)="visualizar(receita)">Visualizar</button>
+            <button (click)="baixar(receita)">Baixar</button>
+            {{ receita }}
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="consulta?.atestados?.length > 0">
+        <strong>Atestados:</strong>
+        <ul>
+          <li *ngFor="let atestado of consulta.atestados">
+            <button (click)="visualizar(atestado)">Visualizar</button>
+            <button (click)="baixar(atestado)">Baixar</button>
+            {{ atestado }}
+          </li>
+        </ul>
+      </div>
+
+      <p><strong>Observações:</strong> {{ consulta.observacoes }}</p>
     </div>
 
-    <div *ngIf="consulta.atestados.length">
-      <strong>Atestados:</strong>
-      <ul>
-        <li *ngFor="let atestado of consulta.atestados">
-          <button (click)="visualizar(atestado)">Visualizar</button>
-          <button (click)="baixar(atestado)">Baixar</button>
-          {{ atestado }}
-        </li>
-      </ul>
+    <div class="acoes">
+      <button (click)="irParaNovaConsulta()" class="btn btn-success">Adicionar nova consulta</button>
     </div>
-
-    <p><strong>Observações:</strong> {{ consulta.observacoes }}</p>
   </div>
-
-  <div class="acoes">
-    <button (click)="adicionarConsulta()">Adicionar nova consulta</button>
-  </div>
-</div>
+</main>

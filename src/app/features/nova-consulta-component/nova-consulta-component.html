@@ -1,0 +1,32 @@
+<main class="form-container">
+  <h2 class="titulo">Nova Consulta</h2>
+
+  <form #form="ngForm" (ngSubmit)="salvarConsulta(form)" class="form-box">
+    <div class="form-group">
+      <label for="data">Data da Consulta</label>
+      <input type="date" id="data" name="data" required ngModel />
+    </div>
+
+    <div class="form-group">
+      <label for="medico">Médico</label>
+      <input type="text" id="medico" name="medico" required ngModel />
+    </div>
+
+    <div class="form-group">
+      <label for="diagnostico">Diagnóstico</label>
+      <input type="text" id="diagnostico" name="diagnostico" required ngModel />
+    </div>
+
+    <div class="form-group">
+      <label for="receita">Receita (arquivo PDF)</label>
+      <input type="text" id="receita" name="receita" placeholder="Ex: receita-imuno.pdf" required ngModel />
+    </div>
+
+    <div class="form-group">
+      <label for="observacoes">Observações</label>
+      <textarea id="observacoes" name="observacoes" rows="3" ngModel></textarea>
+    </div>
+
+    <button type="submit" class="btn-salvar" (click)="salvarConsulta(form)">Salvar</button>
+  </form>
+</main>

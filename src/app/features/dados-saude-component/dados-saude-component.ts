@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { DadosSaudeService } from '../../core/dadosSaude.service';
+import { DadoSaude } from '../../core/interfaces/dadosSaude.interface';
 // import { DadosSaudeService } from '../../core/DadosSaude.service';
 
 @Component({
@@ -20,10 +21,22 @@ export class DadosSaudeComponent {
   ) { }
 
   onSubmit(form: NgForm) {
-    if (form.valid) {
-      this.serviceDadosVitias.saveDadosSaude(form.value).subscribe(x => {
-        console.log(x);
-      })
-    }
+  if (form.valid) {
+    const novoDado: DadoSaude = {
+      dataColeta: new Date().toISOString(),
+      pressaoArterial: form.value.pressaoArterial,
+      frequenciaCardiaca: `${form.value.frequenciaCardicacao} bpm`,
+      temperaturaCorporal: `${form.value.temperaturaCorporal}°C`,
+      saturacaoOxigenio: `${form.value.saturacaoOxigenio}%`,
+      peso: `${form.value.peso}kg`
+    };
+
+    const historico: DadoSaude[] = JSON.parse(localStorage.getItem('historicoSaude') || '[]');
+    historico.push(novoDado);
+    localStorage.setItem('historicoSaude', JSON.stringify(historico));
+
+    this.mensagemSucesso = 'Dados salvos com sucesso!';
+    form.resetForm();
+  }
   }
 }

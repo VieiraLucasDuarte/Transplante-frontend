@@ -32,31 +32,6 @@
       <input type="number" id="peso" name="peso" step="0.1" required ngModel />
       <small *ngIf="form.submitted && !form.controls['peso']?.valid">Informe seu peso.</small>
     </div>
-
-    <div class="form-group checkbox-group">
-      <input type="checkbox" id="tomouRemedios" name="tomouRemedios" ngModel />
-      <label for="tomouRemedios">Tomei todos os medicamentos hoje</label>
-    </div>
-
-    <!-- <div class="form-group">
-      <label>Como você está se sentindo hoje?</label>
-      <div class="emoji-selector">
-        <label>
-          <input type="radio" name="humor" value="feliz" [(ngModel)]="humorSelecionado" required />
-          🙂 Feliz
-        </label>
-        <label>
-          <input type="radio" name="humor" value="neutro" [(ngModel)]="humorSelecionado" />
-          😐 Neutro
-        </label>
-        <label>
-          <input type="radio" name="humor" value="triste" [(ngModel)]="humorSelecionado" />
-          😞 Triste
-        </label>
-      </div>
-      <small *ngIf="form.submitted && !humorSelecionado">Escolha como está se sentindo.</small>
-    </div> -->
-
     <button type="submit" class="submit-btn">Salvar</button>
 
     <p class="success-msg" *ngIf="mensagemSucesso">{{ mensagemSucesso }}</p>
