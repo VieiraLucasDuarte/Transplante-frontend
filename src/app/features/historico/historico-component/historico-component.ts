@@ -13,8 +13,9 @@ import { isPlatformBrowser } from '@angular/common';
 })
 
 export class HistoricoComponent implements OnInit {
-  // historico: DadosVitais[] = [];
+  historicoCompleto: any[] = [];
   historico: any[] = [];
+  historicoTotal: any[] = [];
   constructor(
     private serviceDadosVitias: DadosSaudeService,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -27,6 +28,8 @@ export class HistoricoComponent implements OnInit {
       const dadosSalvos = dados ? JSON.parse(dados) : [];
       this.historico = [...this.historico, ...dadosSalvos]
     }
+    this.historicoTotal = this.historico;
+    this.aplicarFiltro();
   }
 
   findDadosSaude() {
@@ -36,19 +39,58 @@ export class HistoricoComponent implements OnInit {
     })
   }
 
-  filtroSelecionado: 'hoje' | 'semana' | 'mes' = 'hoje';
+  aplicarFiltro() {
+    const hoje = new Date();
+    let inicio: Date;
+
+    switch (this.filtroSelecionado) {
+      case 'hoje':
+        inicio = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate());
+        break;
+      case 'semana':
+        inicio = new Date(hoje);
+        inicio.setDate(hoje.getDate() - 7);
+        break;
+      case 'mes':
+        inicio = new Date(hoje);
+        inicio.setMonth(hoje.getMonth() - 1);
+        break;
+      case 'ano':
+        inicio = new Date(hoje);
+        inicio.setFullYear(hoje.getFullYear() - 1);
+        break;
+    }
+    console.log(this.historicoTotal)
+    this.historicoCompleto = this.historicoTotal;
+    this.historico = this.historicoCompleto.filter(item => {
+      const data = new Date(item.dataColeta);
+      return data >= inicio;
+    });
+  }
+
+  filtroSelecionado: 'hoje' | 'semana' | 'mes' | 'ano' = 'hoje';
   preenche() {
     this.historico = [
-      { dataColeta: '12/06/2025', pressaoArterial: '120/80', frequenciaCardiaca: '72 bpm', temperaturaCorporal: '36.5°C', saturacaoOxigenio: '98%', peso: '70kg' },
-      { dataColeta: '11/06/2025', pressaoArterial: '118/78', frequenciaCardiaca: '70 bpm', temperaturaCorporal: '36.6°C', saturacaoOxigenio: '97%', peso: '70.2kg' },
-      { dataColeta: '10/06/2025', pressaoArterial: '121/79', frequenciaCardiaca: '74 bpm', temperaturaCorporal: '36.4°C', saturacaoOxigenio: '99%', peso: '70.1kg' },
-      { dataColeta: '09/06/2025', pressaoArterial: '117/76', frequenciaCardiaca: '68 bpm', temperaturaCorporal: '36.7°C', saturacaoOxigenio: '98%', peso: '69.9kg' },
-      { dataColeta: '08/06/2025', pressaoArterial: '119/77', frequenciaCardiaca: '71 bpm', temperaturaCorporal: '36.5°C', saturacaoOxigenio: '97%', peso: '70kg' },
-      { dataColeta: '07/06/2025', pressaoArterial: '122/80', frequenciaCardiaca: '73 bpm', temperaturaCorporal: '36.6°C', saturacaoOxigenio: '96%', peso: '70.3kg' },
-      { dataColeta: '06/06/2025', pressaoArterial: '116/75', frequenciaCardiaca: '69 bpm', temperaturaCorporal: '36.4°C', saturacaoOxigenio: '98%', peso: '70kg' },
-      { dataColeta: '05/06/2025', pressaoArterial: '118/79', frequenciaCardiaca: '70 bpm', temperaturaCorporal: '36.5°C', saturacaoOxigenio: '97%', peso: '70.1kg' },
-      { dataColeta: '04/06/2025', pressaoArterial: '120/81', frequenciaCardiaca: '75 bpm', temperaturaCorporal: '36.8°C', saturacaoOxigenio: '99%', peso: '70.2kg' },
-      { dataColeta: '03/06/2025', pressaoArterial: '115/74', frequenciaCardiaca: '67 bpm', temperaturaCorporal: '36.3°C', saturacaoOxigenio: '98%', peso: '69.8kg' }
+      { dataColeta: '2025-06-12', pressaoArterial: '120/80', frequenciaCardiaca: '72 bpm', temperaturaCorporal: '36.5°C', saturacaoOxigenio: '98%', peso: '70kg' },
+      { dataColeta: '2025-06-11', pressaoArterial: '118/78', frequenciaCardiaca: '70 bpm', temperaturaCorporal: '36.6°C', saturacaoOxigenio: '97%', peso: '70.2kg' },
+      { dataColeta: '2025-06-10', pressaoArterial: '121/79', frequenciaCardiaca: '74 bpm', temperaturaCorporal: '36.4°C', saturacaoOxigenio: '99%', peso: '70.1kg' },
+      { dataColeta: '2025-06-09', pressaoArterial: '117/76', frequenciaCardiaca: '68 bpm', temperaturaCorporal: '36.7°C', saturacaoOxigenio: '98%', peso: '69.9kg' },
+      { dataColeta: '2025-06-08', pressaoArterial: '119/77', frequenciaCardiaca: '71 bpm', temperaturaCorporal: '36.5°C', saturacaoOxigenio: '97%', peso: '70kg' },
+      { dataColeta: '2025-06-07', pressaoArterial: '122/80', frequenciaCardiaca: '73 bpm', temperaturaCorporal: '36.6°C', saturacaoOxigenio: '96%', peso: '70.3kg' },
+      { dataColeta: '2025-06-06', pressaoArterial: '116/75', frequenciaCardiaca: '69 bpm', temperaturaCorporal: '36.4°C', saturacaoOxigenio: '98%', peso: '70kg' },
+      { dataColeta: '2025-06-05', pressaoArterial: '118/79', frequenciaCardiaca: '70 bpm', temperaturaCorporal: '36.5°C', saturacaoOxigenio: '97%', peso: '70.1kg' },
+      { dataColeta: '2025-06-04', pressaoArterial: '120/81', frequenciaCardiaca: '75 bpm', temperaturaCorporal: '36.8°C', saturacaoOxigenio: '99%', peso: '70.2kg' },
+      { dataColeta: '2025-06-03', pressaoArterial: '115/74', frequenciaCardiaca: '67 bpm', temperaturaCorporal: '36.3°C', saturacaoOxigenio: '98%', peso: '69.8kg' },
+      { dataColeta: '2025-04-12', pressaoArterial: '120/80', frequenciaCardiaca: '72 bpm', temperaturaCorporal: '36.5°C', saturacaoOxigenio: '98%', peso: '70kg' },
+      { dataColeta: '2025-04-11', pressaoArterial: '118/78', frequenciaCardiaca: '70 bpm', temperaturaCorporal: '36.6°C', saturacaoOxigenio: '97%', peso: '70.2kg' },
+      { dataColeta: '2025-04-10', pressaoArterial: '121/79', frequenciaCardiaca: '74 bpm', temperaturaCorporal: '36.4°C', saturacaoOxigenio: '99%', peso: '70.1kg' },
+      { dataColeta: '2025-04-09', pressaoArterial: '117/76', frequenciaCardiaca: '68 bpm', temperaturaCorporal: '36.7°C', saturacaoOxigenio: '98%', peso: '69.9kg' },
+      { dataColeta: '2025-04-08', pressaoArterial: '119/77', frequenciaCardiaca: '71 bpm', temperaturaCorporal: '36.5°C', saturacaoOxigenio: '97%', peso: '70kg' },
+      { dataColeta: '2025-04-07', pressaoArterial: '122/80', frequenciaCardiaca: '73 bpm', temperaturaCorporal: '36.6°C', saturacaoOxigenio: '96%', peso: '70.3kg' },
+      { dataColeta: '2025-04-06', pressaoArterial: '116/75', frequenciaCardiaca: '69 bpm', temperaturaCorporal: '36.4°C', saturacaoOxigenio: '98%', peso: '70kg' },
+      { dataColeta: '2025-04-05', pressaoArterial: '118/79', frequenciaCardiaca: '70 bpm', temperaturaCorporal: '36.5°C', saturacaoOxigenio: '97%', peso: '70.1kg' },
+      { dataColeta: '2025-04-04', pressaoArterial: '120/81', frequenciaCardiaca: '75 bpm', temperaturaCorporal: '36.8°C', saturacaoOxigenio: '99%', peso: '70.2kg' },
+      { dataColeta: '2025-04-03', pressaoArterial: '115/74', frequenciaCardiaca: '67 bpm', temperaturaCorporal: '36.3°C', saturacaoOxigenio: '98%', peso: '69.8kg' }
     ];
   }
 

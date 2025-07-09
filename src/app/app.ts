@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class App {
   protected title = 'transplante-front';
   showHeader = true;
-  userName = 'Fulano';
+  userName = 'Lucas';
 
    constructor(private router: Router) {
     this.router.events.subscribe(event => {

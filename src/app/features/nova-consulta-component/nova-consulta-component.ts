@@ -12,20 +12,19 @@ export class NovaConsultaComponent {
 constructor(private router: Router) {}
 
   salvarConsulta(form: any) {
-    console.log(form)
     if (form.valid) {
       const novaConsulta = {
         data: form.value.data,
         medico: form.value.medico,
         diagnostico: form.value.diagnostico,
-        receita: form.value.receita,
+        receita: ['receita-hipertensao.pdf'],
+        atestados: ['atestado-descanso.pdf'],
         observacoes: form.value.observacoes
       };
-
+        
       const consultas = JSON.parse(sessionStorage.getItem('consultas') || '[]');
       consultas.push(novaConsulta);
       sessionStorage.setItem('consultas', JSON.stringify(consultas));
-
       this.router.navigate(['/consulta']);
     }
   }

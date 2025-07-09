@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { DadosSaudeService } from '../../core/dadosSaude.service';
 import { DadoSaude } from '../../core/interfaces/dadosSaude.interface';
-// import { DadosSaudeService } from '../../core/DadosSaude.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dados-saude-component',
@@ -17,26 +17,29 @@ export class DadosSaudeComponent {
   mensagemSucesso = '';
 
   constructor(
-    private serviceDadosVitias: DadosSaudeService
+    private serviceDadosVitias: DadosSaudeService,
+    private router: Router
   ) { }
 
   onSubmit(form: NgForm) {
-  if (form.valid) {
-    const novoDado: DadoSaude = {
-      dataColeta: new Date().toISOString(),
-      pressaoArterial: form.value.pressaoArterial,
-      frequenciaCardiaca: `${form.value.frequenciaCardicacao} bpm`,
-      temperaturaCorporal: `${form.value.temperaturaCorporal}°C`,
-      saturacaoOxigenio: `${form.value.saturacaoOxigenio}%`,
-      peso: `${form.value.peso}kg`
-    };
+    if (form.valid) {
+      const novoDado: DadoSaude = {
+        dataColeta: new Date().toISOString(),
+        pressaoArterial: form.value.pressaoArterial,
+        frequenciaCardiaca: `${form.value.frequenciaCardicacao} bpm`,
+        temperaturaCorporal: `${form.value.temperaturaCorporal}°C`,
+        saturacaoOxigenio: `${form.value.saturacaoOxigenio}%`,
+        peso: `${form.value.peso}kg`
+      };
 
-    const historico: DadoSaude[] = JSON.parse(localStorage.getItem('historicoSaude') || '[]');
-    historico.push(novoDado);
-    localStorage.setItem('historicoSaude', JSON.stringify(historico));
+      const historico: DadoSaude[] = JSON.parse(localStorage.getItem('historicoSaude') || '[]');
+      historico.push(novoDado);
+      localStorage.setItem('historicoSaude', JSON.stringify(historico));
 
-    this.mensagemSucesso = 'Dados salvos com sucesso!';
-    form.resetForm();
-  }
+      this.mensagemSucesso = 'Dados salvos com sucesso!';
+      form.resetForm();
+      this.router.navigate(['/historico']);
+
+    }
   }
 }

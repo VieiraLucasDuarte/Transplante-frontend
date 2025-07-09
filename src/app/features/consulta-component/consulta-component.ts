@@ -16,10 +16,11 @@ export class ConsultaComponent implements OnInit {
 
   consultas: any[] = [];
   ngOnInit(): void {
+    this.prencher();
     if (isPlatformBrowser(this.platformId)) {
       const dados = sessionStorage.getItem('consultas');
-      this.consultas = dados ? JSON.parse(dados) : [];
-      console.log(this.consultas)
+      const dadosSalvos = dados ? JSON.parse(dados) : [];
+      this.consultas = [...this.consultas, ...dadosSalvos];
     }
   }
 
@@ -36,7 +37,7 @@ export class ConsultaComponent implements OnInit {
     alert(`Baixando: ${arquivo}`);
   }
 
-  preenhcer() {
+  prencher() {
     this.consultas = [
       {
         data: '10/06/2025',
@@ -51,7 +52,7 @@ export class ConsultaComponent implements OnInit {
         medico: 'Dra. Ana Costa',
         diagnostico: 'Controle de imunossupressor',
         receitas: ['receita-imuno.pdf'],
-        atestados: [],
+        atestados: ['atestado-descanso.pdf'],
         observacoes: 'Revisar em 30 dias.'
       }
     ];

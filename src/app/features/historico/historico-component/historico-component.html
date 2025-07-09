@@ -1,10 +1,11 @@
 <main class="form-container">
   <h2 style="text-align: center;">Histórico de Dados da Saúde</h2>
-  <div class="filtros">
-    <button [class.ativo]="filtroSelecionado === 'hoje'" (click)="filtroSelecionado = 'hoje'">Hoje</button>
-    <button [class.ativo]="filtroSelecionado === 'semana'" (click)="filtroSelecionado = 'semana'">Semana</button>
-    <button [class.ativo]="filtroSelecionado === 'mes'" (click)="filtroSelecionado = 'mes'">Mês</button>
-  </div>
+<div class="filtros">
+  <button [class.ativo]="filtroSelecionado === 'hoje'" (click)="filtroSelecionado = 'hoje'; aplicarFiltro()">Hoje</button>
+  <button [class.ativo]="filtroSelecionado === 'semana'" (click)="filtroSelecionado = 'semana'; aplicarFiltro()">Semana</button>
+  <button [class.ativo]="filtroSelecionado === 'mes'" (click)="filtroSelecionado = 'mes'; aplicarFiltro()">Mês</button>
+  <button [class.ativo]="filtroSelecionado === 'ano'" (click)="filtroSelecionado = 'ano'; aplicarFiltro()">Ano</button>
+</div>
 
   <table class="tabela" *ngIf="historico && historico.length > 0">
     <thead>
